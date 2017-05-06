@@ -91,7 +91,7 @@ DevOps -- konec zavedeným pořádkům vývoje a řízení kvality softwaru?
 \color{tulgray}%
 Předmět: & 4IT446 -- Řízení kvality softwaru \\
 \color{tulgray}%
-Student: & Luděk Veselý \\
+Student: & Bc. Luděk Veselý \\
 \color{tulgray}%
 E-mail: & vesl00@vse.cz \\
 \end{tabularx}
@@ -141,37 +141,37 @@ E-mail: & vesl00@vse.cz \\
 Vývoj software prošel za svou dobu řadou změn, stále jsou však využívány přístupy, které vznikly v době, 
 kdy byly požadavky na vývoj jiné než v současné době. Nyní je vývoj software rychlejší a dynamičtější, je třeba
 být schopen rychle reagovat na změny, umět doručit novou funkcionalitu uživateli co nejdříve. IT odvětví se
-totiž odlišuje od odvětví tradičních, k řízení je tedy třeba přistupovat jinak, než v případě tradičních odvětví.
-Přestože se i v~rámci IT jednotlivé zaměření dosti odlišují (například požadavky na stabilitu systému jsou
+totiž odlišuje od odvětví tradičních, k řízení je tedy třeba přistupovat jinak, než v~případě tradičních odvětví.
+Přestože se i v~rámci IT dílčí zaměření dosti odlišují (například požadavky na stabilitu systému jsou
 jiné u zdravotnického zařízení a jiné u webové fotogalerie), stále se toto odvětví od~těch tradičních odlišuje.
 
-Těmto problémům by měl pomoci čelit agilní přístup, který popisuje jiné uvažování o vývoji software. Zákazník 
+Těmto problémům by měl pomoci čelit agilní přístup, který definuje jiné uvažování o vývoji software. Zákazník 
 je v~samém centru dění a primární je jeho spokojenost. S tím také souvisí pojem DevOps, který popisuje propojení 
 světů vývojářů, správců a testerů a vede tak k~odstranění bariér, které mohou blokovat uvedení software 
-do~produkčního prostředí.
+do~provozu.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{devops.png}
-\caption{Vztah vývoje, provozu, QA a DevOps (zdroj: \cite{devops-img})}
+\caption{Vztah vývoje, provozu, QA a DevOps (Zdroj: \cite{devops-img})}
 \label{devops}
 \end{figure}
 
 Tato práce si klade za cíl provést světem DevOps -- vysvětlit, proč může být přínosné tento koncept adoptovat
-a představit technické prostředky, kterými lze tohoto cíle dosáhnout. Cílem této práce není pouze popisovat, 
+a představit technické prostředky, kterými lze tohoto cíle dosáhnout. Cílem této práce není popisovat, 
 co to vlastně DevOps je nebo jaká je jeho historie. Tato práce je spíše praktický průvodce, který čtenáři dodá 
 přehled technik a nástrojů, které mu pomohou v adaptaci tohoto přístupu.
 
 V úvodu práce je vysvětlen stav, kdy je aplikace implementována jako jeden celistvý systém a o~její provoz
 se stará někdo jiný, než ji vyvíjí, což s~sebou nese řadu problémů, zejména co se zodpovědnosti
-týče. Následně je zaveden princip DevOps, a vysvětleno, jak může tato filozofie pomoci čelit zmíněným problémům. 
-Následně jsou popisovány prostředky pomáhající v~naplnění DevOps ideálů -- architektura mikroslužeb, kontinuální 
-integrace a nasazování, kontejnerizace, monitoring.
+týče. Následně je zavedena filozofie DevOps, a vysvětleno, jak může pomoci čelit zmíněným problémům. 
+Následně jsou popisovány vybrané prostředky pomáhající v~naplnění DevOps ideálů -- architektura mikroslužeb, 
+kontinuální integrace a nasazování, kontejnerizace, monitoring.
 
 
 \chapter{DevOps jako nový přístup k řízení vývoje a kvality software}
 
-Za dobu vývoje a řízení kvality software se procesy s tím související vcelku ustálily. Jednotlivé role
+Za dobu vývoje a řízení kvality software se procesy s tím související ustálily. Jednotlivé role
 nebo pozice v IT světě jsou obecně známé včetně náplně jejich práce a souvisejících kompetencí. 
 Jenže tento přístup je praktikován již nějakou dobu a v okamžiku svého vzniku rozhodně nebylo počítáno
 s bouřlivostí a rychlostí rozvoje IT, jak ji známe dnes. Stále častěji se tak mluví o DevOps jako
@@ -193,7 +193,7 @@ o tato prostředí bude starat -- těmto lidem se souhrnně říká \textbf{Oper
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{deployment.png}
-\caption{Řada prostředí pro manuální schválení software (zdroj: \cite{deployment})}
+\caption{Řada prostředí pro manuální schválení software (Zdroj: \cite{deployment})}
 \label{deployment}
 \end{figure}
 
@@ -222,7 +222,7 @@ umět, což je v případě IT projektů nesmírně obtížné \cite[strana~73]{
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{devops-wall.png}
-\caption{Bariéra mezi vývojovým a provozním týmem (zdroj: \cite{devops-wall})}
+\caption{Bariéra mezi vývojovým a provozním týmem (Zdroj: \cite{devops-wall})}
 \label{devops-wall}
 \end{figure}
 
@@ -238,26 +238,37 @@ a samozřejmě je také třeba počítat se zvýšeným rizikem vzniku chyb.
 
 \section{Propojení vývoje a provozu -- DevOps}
 
-...
+Pro čelení těmto problémům vznikla filozofie DevOps, jež si dává za cíl oba světy (vývoj i provoz) propojit.
+DevOps je primárně o kultuře -- pokud není ve firmě zájem jej zavádět, je jeho použití prakticky nemožné. Týmy
+by měly být otevřené a chtít sdílet znalosti, spolupracovat na řešení problémů, být připraveni nést odpovědnost.
+K tomu je nutné počítat se zavedením automatizace a samozřejmě také měřit vhodné metriky pro ověření dosaženého
+zlepšení. DevOps je na rozdíl od Tradičního přístupu kontinuální proces, který se neustále opakuje.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{devops-vs-traditional.png}
-\caption{Vývoj architektury a nasazování software (zdroj: \cite[strana~109]{microservices})}
+\caption{Vývoj architektury a nasazování software (Zdroj: \cite[strana~109]{microservices})}
 \label{devops-vs-traditional}
 \end{figure}
 
-- jeden tym resi vsechno\\
-- otestovani a nasazeni je soucasti vyvoje\\
-- neustala kontrola nad kvalitou sw (zero bug policy)
+Vzhledem k rozsahu této práce se z~výše uvedeného dále zabývám jen zaváděním automatizace -- nelze pokrýt veškerá 
+témata dostatečně 
+podrobně. Filozofie DevOps postupně promlouvá do přístupu k~návrhu architektury software a způsobu provozu a
+nasazování software. Namísto monolitické architektury nabývá na popularitě architektura mikroslužeb, software
+je dodáván častěji po menších změnách a plně automatizovaně, což je znázorněno na obrázku \ref{devops-vs-traditional}.
 
+V této práci uvedené principy a techniky naleznou nejlepší uplatnění při vývoji a dodávce software poskytovaného
+jako služba. Je zřejmé, že některé druhy software buď není možné nebo naopak není žádoucí dodávat kontinuálně,
+agilním způsobem. Prvním příkladem může být software v kávovaru, ke~kterému nemá vývojář po jeho prodeji přístup, 
+druhým příkladem budiž software autonomního řízení vozidla, které musí procházet zcela odlišnými schvalovacími
+procesy.
 
 \chapter{Prostředky DevOps}
 
 Pro dosažení ideálu DevOps je kromě samotné změny přemýšlení nad dodávkou software také nutné se zamyslet
 nad technickými prostředky. Pokud je vyvíjená aplikace velká a její nasazení trvá příliš dlouhou dobu, 
 je adaptace agilního přístupu téměř nemožná, protože samotné nasazení aplikace veškerou agilitu pohřbí.
-Je na místě přemýšlet o tom, jak změny doručovat častěji, po menších částech až kontinuálně. Jako vhodné
+Je na místě přemýšlet o tom, jak změny doručovat častěji, po menších částech, až kontinuálně. Jako vhodné
 se jeví změna architektury tak, aby bylo možné nasazovat častěji a automatizace běžných a opakujících se
 činností v průběhu integrace změn a jejich doručování.
 
@@ -270,18 +281,18 @@ aplikaci.
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{monolith.png}
-\caption{Monolit (zdroj: \cite{monolith})}
+\caption{Monolit (Zdroj: \cite{monolith})}
 \label{monolith}
 \end{figure}
 
 Uvažujme elektronický obchod, který je implementován jako jedna celistvá aplikace, která umožňuje
 zákazníkům nakupovat, zákaznické podpoře pracovat s objednávkami, účetním pracovat s fakturami
 a zároveň také vedení firmy generovat reporty. Pokud by v~tomto případě bylo třeba provést triviální 
-opravu v~jedné části aplikace, je nutné ji vždy otestovat a nasadit ji celou. Samozřejmě by bylo možné
-testovat pouze tu část aplikace, které se změna týká, není pak ale možné odhalit to, zda případná chyba
+opravu v~jedné části aplikace, je nutné ji vždy otestovat a nasadit celou. Samozřejmě by bylo možné
+testovat pouze tu část aplikace, které se změna týká, není pak ale možné odhalit, zda případná chyba
 neovlivní úplně jinou část aplikace \cite[strana~77]{devops}. V~takovou chvíli je třeba se rozhodnout, do~jaké 
-míry je třeba aplikaci testovat, zda případně není možné počkat, až bude nasaditelných změn více. V~tu chvíli 
-ale může být možnost obchodu pružně reagovat na požadavky obchodu dokonce i konkurenční výhodou.
+míry je třeba aplikaci testovat, zda případně není možné počkat, až bude nasaditelných změn více. V~tento 
+okamžik ale může být možnost pružně reagovat na požadavky obchodu dokonce i konkurenční výhodou.
 Problémem takové aplikace je také možnost jejího škálování. V okamžiku, kdy není možné navyšovat
 výkon stroje, na kterém je provozována (vertikální škálování), je možné škálovat horizontálně pouze 
 přidáváním dalších instancí celé aplikace, přestože je fakticky třeba navýšit výpočetní kapacitu pouze 
@@ -290,29 +301,29 @@ pro jednu konkrétní část aplikace \cite[strana~78]{devops}.
 Způsob návrhu, kdy jsou spolu všechny části aplikace provázány a musí být nasazovány společně se
 nazývá \textbf{monolitická architektura} \cite[strana~7]{microservices}. V praxi bych tento návrh architektury 
 použil pouze u projektu, který je malý (co do množství zdrojového kódu) a nepředpokládá se u něj v~budoucnu 
-další výrazné rozšiřování. Další podmínkou pro jeho úspěšné použití by byla práce jediného programátora na celém 
+další výrazné rozšiřování. Další podmínkou pro jeho úspěšné použití by byla práce jediného programátora na~celém 
 projektu. Jinak docházelo spíše k odkládání nasazení a následným obavám, zda se něco nerozbije, protože případná
 oprava by trvala příliš dlouho. Dalším důsledkem byl problém aktualizace vývojových nástrojů a prostředí, 
-v~nichž aplikace běží, což znamenalo výpadek celé aplikace. V případě, že se neaktualizovalo zase vzrůstalo
-riziko odhalení bezpečnostních chyb a v konečném důsledků také nalezení vývojářů, kteří jsou ochotni
+v~nichž aplikace běží, což by znamenalo výpadek celé aplikace. V případě, že se neaktualizovalo zase vzrůstalo
+riziko odhalení bezpečnostních chyb a v konečném důsledku byl také problém nalézt vývojáře, kteří jsou ochotni
 pracovat s neaktuálními technologiemi.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{monolit-vs-microservices.png}
-\caption{Rozdíl mezi monolitickou architekturou a mikroslužbami (zdroj: \cite{microservices-blog})}
+\caption{Rozdíl mezi monolitickou architekturou a mikroslužbami (Zdroj: \cite{microservices-blog})}
 \label{monolit-vs-microservices}
 \end{figure}
 
 Naproti tomu \textbf{architektura mikroslužeb} umožňuje rozdělení aplikace na několik samostatných celků.
 Každý díl (mikroslužba) je samostatná aplikace, která je samostatně nasaditelná a spustitelná a disponuje
 vlastním rozhraním, kterým s~ní lze komunikovat \cite[strana~8]{microservices}. Konkrétním příkladem na případu
-elektronického obchodu je rozdělení na služby obsluhující objednávky, dále službu obsluhující produkty a tak dále. 
+elektronického obchodu je rozdělení na službu obsluhující objednávky, dále službu obsluhující produkty a tak dále. 
 Primární výhodou tohoto přístupu je jednoduchost a samostatnost každé mikroslužby. Díky tomu, že řeší jeden izolovaný 
 problém, je pro programátora snadnější ji pochopit a udržovat, je možné ji daleko rychleji otestovat a nasadit. 
 Dále je také možné pro její vývoj zvolit optimální technologie -- pro ukládání objednávek bude vhodné
-použít databázi, která zajistí především bezpečné uložení dat, pro službu zobrazující produkty bude vhodnější
-použít databázi, která nabízí rychlé čtení a dostatek funkcí pro textové vyhledávání \cite[strana~83]{devops}.
+použít databázi, která zajistí především bezpečné uložení dat, naproti tomu pro službu zobrazující produkty bude 
+vhodnější použít databázi, která nabízí rychlé čtení a dostatek funkcí pro textové vyhledávání \cite[strana~83]{devops}.
 
 \subsection{Velikost mikroslužeb}
 
@@ -328,7 +339,7 @@ na~optimální velikost služby, případně na způsob jejich návrhu.
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{microservices-scale.png}
-\caption{Dimenze škálování a mikroslužby (zdroj: \cite[strana~10]{microservices})}
+\caption{Dimenze škálování a mikroslužby (Zdroj: \cite[strana~10]{microservices})}
 \label{microservices-scale}
 \end{figure}
 
@@ -336,7 +347,7 @@ Prvně lze začít vyčleňováním samostatně funkčních celků. Je třeba id
 to může být například systém pro rozesílání novinek elektronickou poštou. Následně lze postupně oddělovat další
 části, které mohou být samostatně funkční. Ve výsledku jsou tak mikroslužby děleny dle logických částí
 aplikace, tak jak mají na starosti jinou část obchodu \cite[strana~11]{microservices}. Tento postup je 
-poměrně dlouhodobý, osvědčil se mi ale v případě, kdy byla aplikace technologicky zastaralá a její další rozšiřování
+spíše dlouhodobý, osvědčil se mi ale v případě, kdy byla aplikace technologicky zastaralá a její další rozšiřování
 (nebo jen aktualizace) je problematické.
 
 Rozdělení aplikace na služby lze vztáhnout i k rozdělení týmů nebo lidí ve firmě. Pokud se jeden vývojář stará v~rámci 
@@ -349,9 +360,9 @@ myšlenka je to však stará padesát let a je známá jako Conway's Law~\cite{m
 \subsection{Problémy při implementaci mikroslužeb}
 
 V okamžiku, kdy přibývají další mikroslužby lze pozorovat, že se v určitých rysech shodují. Často využívají
-stejné vývojové nebo běhové prostředí, pracují s obdobnými zdroji. To může vést ke snaze opakující se činnosti
+stejné vývojové nebo běhové prostředí, pracují s~obdobnými zdroji. To může vést ke snaze opakující se činnosti
 nějakým způsobem standardizovat nebo vyčleňovat \cite[strana~24]{microservices}. Ať už se jedná o vytváření 
-sdílených knihoven  nebo standardizaci rozhraní a chování služeb, je to krok zpět, který znemožňuje 
+sdílených knihoven  nebo standardizaci rozhraní a chování služeb, je to krok zpět, který degraduje 
 využití potenciálu mikroslužeb a zavádění inovací do firmy \cite[strana~27]{devops}.
 
 Nelze také opomenout to, že problémy, které existují při vývoji monolitických aplikací se objevují také
@@ -372,7 +383,7 @@ a přínosný.
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{ci-cd-pipeline.png}
-\caption{Průběh kontinuálního nasazování (zdroj: \cite{ci-cd-pipeline})}
+\caption{Průběh kontinuálního nasazování (Zdroj: \cite{ci-cd-pipeline})}
 \label{ci-cd-pipeline}
 \end{figure}
 
@@ -400,20 +411,20 @@ Nástrojů, které umožňují kontinuální integraci je celá řada, jejich ko
 v~\cite[strana~139]{microservices}. Výběr vhodného nástroje je závislý na požadavcích a možnostech dané
 společnosti. Základní členění je podle toho, zda je daný nástroj poskytován jako služba, nebo si jej
 musí uživatel spravovat sám. Každé řešení má své výhody a nevýhody, každý podnik je schopný akceptovat
-něco jiného, obecně však je viditelná tendence moderních firem spíše využívat služeb. Dalším kritériem
-výběru je otevřenost nástroje a případně jeho cena. Konečně je také kritériem pro výběr nástroje jeho
+něco jiného, obecně však je viditelná tendence firem spíše využívat služeb. Dalším kritériem
+výběru je otevřenost nástroje a jeho cena. Konečně je také kritériem pro výběr nástroje jeho
 funkčnost, rychlost implementace a podpora napojení na další systémy.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{ci-steps.png}
-\caption{Dílčí kroky integračního serveru (zdroj: \cite{gitlab})}
+\caption{Dílčí kroky integračního serveru (Zdroj: \cite{gitlab})}
 \label{ci-steps}
 \end{figure}
 
 V praxi jsem používal více nástrojů - GitLab CI, CircleCI, Drone, Jenkins a Bamboo. Z těchto nástrojů je
-jediný kompletně placený nástroj Bamboo \cite{bamboo}, který byl společností zvolen pro jeho integraci s~dalšími 
-používanými nástroji firmy Atlassian. Bohužel tento nástroj optimálně nejlépe agilní přístup a tak celý proces 
+jediný kompletně placený nástroj Bamboo \cite{bamboo}, který byl použit z~důvodu dostupné integrace s~dalšími 
+nástroji firmy Atlassian. Bohužel tento nástroj optimálně nepodporuje agilní přístup a tak celý proces 
 zpomaluje. Zajímavý je nástroj Drone \cite{drone}, který je extrémně štíhlý a rychlý, dostupný včetně zdrojových kódů. 
 Jeho nevýhodou může být nutnost jej zprovoznit a spravovat na své vlastní infrastruktuře, na druhou stranu ale 
 nedisponuje žádnými omezeními, může tak jít při častějším používání o cenově výhodnější řešení. Na stejném
@@ -432,13 +443,13 @@ Základem je definovat jednotlivé kroky, které má integrační server vykonat
 (stages), které seskupují příkazy zajišťující jeden druh činnosti. Může jít o instalaci závislostí, 
 provedení statické analýzy, spuštění jednotlivých testů (jednotkových, integračních, zátěžových...), vytvoření
 artefaktu, jeho zveřejnění a následné nasazení do odpovídajícího prostředí, případně otestování po tomto nasazení --
-tyto fáze jsou znázorněny na obrázku \ref{ci-steps}. Následně jsou v rámci těchto sekcí prováděny jednotlivé
+tyto fáze jsou znázorněny na obrázku \ref{ci-steps}. Následně jsou v~rámci těchto sekcí prováděny jednotlivé
 příkazy, kterými může být konkrétní spuštění skriptu, programu nebo utility.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{gitlab.png}
-\caption{Sledování průběhu integrace v GitLab CI (zdroj: \cite{gitlab})}
+\caption{Sledování průběhu integrace v GitLab CI (Zdroj: \cite{gitlab})}
 \label{gitlab}
 \end{figure}
 
@@ -452,7 +463,7 @@ nebo integrační pomocí nástroje \verb|codeception|, který na pozadí spouš
 je zobrazena ve výpisu \ref{code:gitlab}, přičemž dále popisuje stažení závislostí a sestavení balíčku v sekci 
 \verb|build|, jeho zveřejnění v sekci \verb|release| a nakonec také nasazení v sekci \verb|deploy|.
 
-Jediným limitem je zde nutnost použití současně s repozitářem GitLab. Ten je nabízen zdarma jako služba
+Jediným limitem je zde nutnost použití integrace současně s repozitářem GitLab. Ten je nabízen zdarma jako služba
 a s~integrační částí sdílí společné grafické rozhraní. Přímo v~kódu je tak vidět, co již bylo
 integrováno a s~jakým výsledkem. Průběh integrace může sledovat každý, kdo má k~repozitáři přístup, 
 na obrázku \ref{gitlab} lze vidět průběh právě probíhající integrace. Vhodné je také provést propojení
@@ -505,19 +516,19 @@ v~konfiguraci schvalovány a verzovány.
 \section{Kontejnerizace}
 
 S mikroslužbami a kontinuální integrací souvisí také to, že je třeba nějakým způsobem vytvořit takový artefakt, 
-který bude možné snadno distribuovat a spustit. K tomu by bylo možné vytvářet binární soubory, JAR nebo DLL
-balíčky, nicméně ne každý programovací jazyk toto umožňuje. Například skriptovací jazyky zpravidla
+který bude možné snadno distribuovat a spustit. K~tomu by bylo možné vytvářet binární soubory, JAR nebo DLL
+balíčky, nicméně ne každý programovací jazyk toto umožňuje -- například skriptovací jazyky zpravidla
 vyžadují nějaké běhové prostředí. To není úplně ideální situace ve chvíli, kdy pracujeme s mikroslužbami, 
 a s každou z nich se pracuje jinak, což komplikuje jejich provoz. 
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{container-vs-vm.png}
-\caption{Porovnání virtálního stroje a kontejneru (zdroj: \cite[strana~68]{devops})}
+\caption{Porovnání virtálního stroje a kontejneru (Zdroj: \cite[strana~68]{devops})}
 \label{container-vs-vm}
 \end{figure}
 
-Pro zefektivnění provozu je přínosné vychýzet z~metodologie The Twelve-Factor App~\cite{12factor}, 
+Pro zefektivnění provozu je přínosné vycházet z~metodologie The Twelve-Factor App~\cite{12factor}, 
 která přináší sadu doporučení, jak těmto problémům čelit. Tato doporučení lze shrnout do několika bodů:
 
 \begin{itemize}
@@ -533,59 +544,97 @@ pro~bezproblémové škálování.
 \subsection{Docker}
 
 Tomuto přístupu jde naproti použití kontejnerů. Ty jsou k~dispozici již řadu let, jejich popularizaci však
-způsobil až Docker, s~jehož pomocí je práce s kontejnery snadná. Kontejner si lze představit jako virtuální
-stroj, který obsahuje spouštěnou aplikaci se všemi jejími závislostmi, který je však snadné distribuovat a
-spouštět. Přesnější je však o~kontejneru mluvit jako o izolovaném procesu, což lépe vystihuje jeho rychlost
+způsobil až Docker \cite{docker}, s~jehož pomocí je práce s kontejnery snadná. Kontejner si lze představit jako 
+virtuální stroj, který obsahuje spouštěnou aplikaci se všemi jejími závislostmi, který je však snadné distribuovat 
+a spouštět. Přesnější je však o~kontejneru mluvit jako o izolovaném procesu, což lépe vystihuje jeho rychlost
 spouštění a výkonnost, protože kontejner sdílí řadu prostředků s~operačním systémem, v~němž je spouštěn.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=\textwidth]{docker-flow.png}
-\caption{Kroky při práci s nástrojem Docker (zdroj: \cite{docker-flow})}
+\caption{Kroky při práci s nástrojem Docker (Zdroj: \cite{docker-flow})}
 \label{docker-flow}
 \end{figure}
 
-Práce s nástrojem Docker probíhá následovně: Nejprve je napsán \verb|Dockerfile|, což je soubor, který
-definuje kroky, kterými vzniká tzv. obraz (Docker image). Prvním krokem je zpravidla zvolení základního obrazu, 
-z kterého se vychází. To může být jak štíhlá linuxová distribuce typu Busybox, tak kompletní distribuce jako
-Debian nebo Red Hat. Přestože se může zdát vhodné použít známou plnohodnotnou distribuci obsahující všechny
-myslitelné nástroje, je daleko vhodnější použít co nejjednodušší distribuci. Jednak se tím sníží požadavky na
-propustnost sítě a velikost diskového prostoru a s~obrazy je tak možné lépe manipulovat (rychleji je distribuovat
-a spouštět), především je zvýšena bezpečnost díky použití pouze nutných závislostí. Sestavit obraz je možné
-pomocí příkazu \verb|docker build -t my-app| spouštěném ve složce obsahující \verb|Dockerfile|. Po provedení 
-tohoto příkazu je vytvořen obraz pojmenovaný jako \verb|my-app|
-
-.....
-
-TODO: docker, 12 factor, orchestrace a monitoring, kubernetes a selhani+healthchecky ......
+Práce s nástrojem Docker probíhá následovně: Nejprve je napsán \verb|Dockerfile| (příklad je ve výpisu
+\ref{code:dockerfile}), což je soubor, který definuje kroky, kterými vzniká tzv. obraz (Docker image). Prvním 
+krokem je zpravidla zvolení základního obrazu, z~kterého se vychází. To může být jak štíhlá linuxová distribuce typu 
+Busybox, tak kompletní distribuce jako Debian nebo CentOS. Přestože se může zdát vhodné použít známou plnohodnotnou
+distribuci obsahující všechny myslitelné nástroje, je daleko vhodnější použít co nejjednodušší distribuci. Jednak se 
+tím sníží požadavky na~propustnost sítě a velikost diskového prostoru a s~obrazy je tak možné lépe manipulovat (rychleji 
+je distribuovat a spouštět), především je však zvýšena bezpečnost díky použití pouze nutných závislostí. Sestavit obraz 
+je možné pomocí příkazu \verb|docker build -t my-app| spouštěném ve~složce obsahující \verb|Dockerfile|. Po~provedení 
+tohoto příkazu je vytvořen obraz pojmenovaný jako \verb|my-app|. Ten je možné příkazem \verb|docker push my-app| 
+nahrát do~veřejného úložiště, kterému se říká Docker Registry, přičemž pokud není řečeno jinak, tak je použito 
+výchozí dostupné na~\url{https://hub.docker.com}. Na serveru je možné tento obraz spustit (a vytvořit tak kontejner)
+příkazem \verb|docker run my-app|. Ten, pokud obraz nenalezne lokálně, stáhne obraz z~registru.
 
 \begin{code}
 \captionsetup{singlelinecheck=false,justification=raggedright}
 \captionof{listing}{Příklad souboru Dockerfile}
 \label{code:dockerfile}
 \begin{minted}{docker}
+# Volba základního obrazu - linuxové distribuce Alpine Linux
 FROM alpine:3.1.0
+
+# Instalace NGINX (webserver a proxy)
 RUN apk --update add nginx
+
+# Kontejner zveřejní port 80
 EXPOSE 80
+
+# Při spuštění kontejneru je spuštěn NGINX na popředí
 ENTRYPOINT nginx -t
 \end{minted}
 \end{code}
 
+Bylo by samozřejmě možné vzniklý obraz nahrát rovnou na server a tam ho spustit -- výhodou použití registru je však
+to, že obraz může být stažen kdykoli i na jiný server, striktně tento přístup odděluje krok zveřejnění artefaktu
+od kroku jeho nasazení. Dále jsou aplikace v kontejnerech nastavovány pomocí proměnných prostředí, mají přesně 
+definované zveřejněné porty, produkují log jako proud událostí, což ctí principy \textit{The Twelve Factor Apps}. 
+Největší výhodou kontejnerů je však to, že umožňují dosáhnout totožného prostředí pro běh aplikace bez závislosti 
+na použitém stroji. Díky tomu lze předejít chybám, kdy se aplikace chovala korektně v testovacím prostředí ale ne 
+v~produkčním, protože se zapomnělo na aktualizaci jedné knihovny. Dále značně zjednodušují lokální vývoj -- vzhledem 
+k~nezávislosti na operačním systému, v němž jsou provozovány je schopen vývojář zprovozni prostředí pro vývoj během 
+okamžiku. Po dokončení vývoje pouhým odstraněním stažených obrazů může uvést svůj stroj do stavu před stažením 
+veškerých závislostí.
 
-%\section{Infrastruktura}
-%TODO:
-%- infrastruktura as a code, config as a code\\
-%- cloud, docker\\
-%- monitoring, logování, chat notifikace\\
-%- serverless
-%- service dicsovery namisto fyzickych serveru, redundance, selhani a failover
-%- canary deployment
+Docker sám o sobě však neřeší veškeré problémy, které se vyskytují při použití mikroslužeb a kontejnerů v~produkčním
+prostředí. V praxi je třeba řešit také dostupnost aplikace, monitorovat a vyhodnocovat její chování, což je součástí
+cyklu DevOps. S rostoucím množstvím provozovaných služeb a serverů je třeba řídit jejich provoz. Ve světě kontejnerů
+se nástroje umožňující správu kontejnerů označují jako orchestrátory, přičemž jich existuje celá řada~\cite[strana~123]{orchestration}. Ty umožňují nasazení kontejnerů napříč celými clustery, kontrolu stavu jednotlivých kontejnerů, 
+jejich dostupnost. Dokáží se tak vyrovnat se~selháním některého z serverů nebo škálovat konkrétní mikroslužbu při
+jejím přetížení. Zároveň také umožňují agregaci logů, které kontejnery produkují a jejich zpřístupnění správci.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Závěr}
 
-...
+V této práci byly popsány problémy vznikající při vývoji a provozu software tradičním způsobem vycházejícím
+z~vodopádového modelu. Byl zaveden pojem~DevOps, který přináší nový přístup k vývoji a provozu software, který
+přináší otevřenost a zodpovědnost do těchto procesů, přičemž cílem je dodávání software tak, aby byl zákazník
+spokojenější. Toho je dosahováno jak změnou kultury a uvažováním vývojářů a správců, tak zavedením řady technických
+opatření nebo nástrojů.
+
+Práce popisuje především technickou stránku zavádění DevOps, zaměřuje se na automatizaci procesů sovisejících
+s nasazováním software. Podrobně je popsána architektura mikroslužeb, která umožňuje s aplikací pracovat 
+prostřednictvím menších částí. Dále jsou popsány kontinuální integrace a nasazování jako způsob neustálého
+automatického doručování software do produkčního prostředí. Nakonec jsou také popsány kontejnery jako způsob
+efektivní distribuce jednotlivých služeb.
+
+Vzhledem k rozsahu práce nebyla vyčerpána veškerá témata související s automatizací, ani nebyla všechna témata
+probrána do dostatečné hloubky -- pro další prozkoumání problematiky lze doporučit literaturu uvedenou v~závěru
+práce, zejména knihu The DevOps 2.0 Toolkit \cite{devops} a knihy z série The New Stack (\cite{microservices} a 
+\cite{orchestration}). 
+
+Z~témat, kterým by bylo vhodné se dále podrobněji věnovat je jistě orchestrace
+(práce s vysokou dostupností aplikace) nebo monitoring (agregace logů, jejich vyhodnocování a alerting).
+Jako teoretického nástupce kontejnerů pak lze v určitých případech uvést architekturu Serverless \cite{serverless},
+která vývojáře plně odstiňuje od procesu sestavování balíčků nebo kontejnerů, ale je distribuován pouze kód, 
+který je následně spouštěn pouze na infrastruktuře poskytovatele. Díky tomu není třeba při návrhu infrastruktury
+uvažovat nad výkonností jednotlivých serverů a době jejich použití - v případě Serverless je infrastruktura
+poskytovatele využita maximálně efektivně a zpoplatněna pouze za její faktické využití.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
@@ -601,13 +650,13 @@ Packt Publishing, 2016 462~s. ISBN 978-1-78528-031-3.
 \bibitem{devops-img}
 SCHAEFFER Chuck. 
 \emph{DevOps \& CRM Software Come Together} [online]. 
-2017 [vid. 2017-05-03]. Dostupné z: 
+2017 [vid. 2017-05-01]. Dostupné z: 
 \url{http://www.crmsearch.com/devops.php}.
 
 \bibitem{deployment}
 VERMA Ravi. 
 \emph{Target Deployment Servers/Environments} [online]. 
-2017 [vid. 2017-05-03]. Dostupné z: 
+2017 [vid. 2017-05-01]. Dostupné z: 
 \url{http://scmquest.com/target-deployment-servers-environments}.
 
 \bibitem{ci-cd-pipeline}
@@ -676,37 +725,43 @@ ATLASSIAN.
 \bibitem{circle}
 CIRCLE CI. 
 \emph{CircleCI} [software]. 
-[přístup 2017-05-03]. Dostupné z: 
+[přístup 2017-05-04]. Dostupné z: 
 \url{https://circleci.com}.
 
 \bibitem{jenkins}
 JENKINS. 
 \emph{Jenkins} [software]. 
-[přístup 2017-05-03]. Dostupné z: 
+[přístup 2017-05-04]. Dostupné z: 
 \url{https://jenkins.io}.
 
-% operations
+% docker, ops
 
 \bibitem{12factor} 
 WIGGINS Adam. 
 \emph{The Twelve-Factor App} [e-kniha].
 2017 [vid. 2017-05-02]. Dostupné z: \url{https://12factor.net/12factor.epub}.
 
+\bibitem{docker}
+DOCKER INC. 
+\emph{Docker} [software]. 
+[přístup 2017-05-05]. Dostupné z: 
+\url{https://www.docker.com}.
+
 \bibitem{docker-flow} 
 DOT CLOUD. 
 \emph{Why Docker} [online].
-2013 [vid. 2017-05-03]. Dostupné z: \url{https://www.slideshare.net/dotCloud/why-docker}.
+2013 [vid. 2017-05-05]. Dostupné z: \url{https://www.slideshare.net/dotCloud/why-docker}.
 
 \bibitem{orchestration} 
 THE NEW STACK. 
 \emph{Automation \& Orchestration with Docker \& Containers} [e-kniha]. 
 2017 [vid. 2017-05-02]. Dostupné z: \url{https://thenewstack.io/ebookseries/}.
 
-\bibitem{serverless} 
-HAUSENBLAUS Michael. 
-\emph{Serverless Ops}. 
-O`Reilly Media, Inc., 2017 102~s. ISBN 978-1-491-97079-9
-
+\bibitem{serverless}
+ROBERTS Mike. 
+\emph{Serverless Architectures} [online]. 
+2016 [vid. 2017-05-06]. Dostupné z: 
+\url{https://martinfowler.com/articles/serverless.html}.
 
 \end{thebibliography}
 
